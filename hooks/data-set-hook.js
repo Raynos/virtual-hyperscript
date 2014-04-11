@@ -4,7 +4,7 @@ module.exports = DataSetHook;
 
 function DataSetHook(value) {
     if (!(this instanceof DataSetHook)) {
-        return new DataSetHook();
+        return new DataSetHook(value);
     }
 
     this.value = value;

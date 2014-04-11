@@ -2,7 +2,7 @@ module.exports = SoftSetHook;
 
 function SoftSetHook(value) {
     if (!(this instanceof SoftSetHook)) {
-        return new SoftSetHook();
+        return new SoftSetHook(value);
     }
 
     this.value = value;
