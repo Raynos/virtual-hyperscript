@@ -16,7 +16,10 @@
     "url": "https://github.com/Raynos/virtual-hyperscript/issues",
     "email": "raynos2@gmail.com"
   },
-  "dependencies": {},
+  "dependencies": {
+    "browser-split": "0.0.1",
+    "data-set": "^3.0.0"
+  },
   "devDependencies": {
     "tape": "~1.0.2"
   },
