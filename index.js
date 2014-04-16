@@ -3,6 +3,7 @@ var VText = require("virtual-dom/vtree/vtext.js")
 var isVNode = require("virtual-dom/vtree/is-vnode")
 var isVText = require("virtual-dom/vtree/is-vtext")
 var isWidget = require("virtual-dom/vtree/is-widget")
+var isHook = require("virtual-dom/vtree/is-vhook")
 
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")
@@ -43,8 +44,9 @@ function h(tagName, properties, children) {
     var keys = Object.keys(props)
     for (var j = 0; j < keys.length; j++) {
         var propName = keys[j]
-        if (propName.substr(0, 5) === "data-") {
-            props[propName] = dataSetHook(props[propName])
+        var value = props[propName]
+        if (!isHook(value) && propName.substr(0, 5) === "data-") {
+            props[propName] = dataSetHook(value)
         }
     }
 
