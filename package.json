@@ -17,7 +17,8 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "data-set": "^3.0.0"
+    "data-set": "^3.0.0",
+    "virtual-dom": "git://github.com/Matt-Esch/virtual-dom#aff7ed63ae7bbe018448640eb26c2ffb2a50a970"
   },
   "devDependencies": {
     "tape": "~1.0.2"
