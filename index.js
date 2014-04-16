@@ -41,7 +41,11 @@ function h(tagName, properties, children) {
     }
 
     // fix cursor bug
-    if (tag === "input" && "value" in props && !isHook(props.value)) {
+    if (tag === "input" &&
+        "value" in props &&
+        value.props !== undefined &&
+        !isHook(props.value)
+    ) {
         props.value = softSetHook(props.value)
     }
 
