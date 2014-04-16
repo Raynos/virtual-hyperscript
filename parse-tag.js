@@ -1,5 +1,3 @@
-var split = require("browser-split")
-
 var classIdSplit = /([\.#]?[a-zA-Z0-9_:-]+)/
 var notClassId = /^\.|#/
 
@@ -12,10 +10,10 @@ function parseTag(tag, props) {
 
     var noId = !("id" in props)
 
-    var tagParts = split(tag, classIdSplit)
+    var tagParts = tag.split(classIdSplit)
     var tagName = null
 
-    if(notClassId.test(tagParts[1])) {
+    if (notClassId.test(tagParts[1])) {
         tagName = "div"
     }
 
