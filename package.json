@@ -1,6 +1,6 @@
 {
   "name": "virtual-hyperscript",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A DSL for creating virtual trees",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
