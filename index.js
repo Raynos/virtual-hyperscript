@@ -13,7 +13,7 @@ module.exports = h
 
 function h(tagName, properties, children) {
     var childNodes = []
-    var tag, props
+    var tag, props, key
 
     if (!children) {
         if (isChildren(properties)) {
@@ -35,6 +35,11 @@ function h(tagName, properties, children) {
         }
     }
 
+    // support keys
+    if ("key" in props) {
+        key = props.key
+    }
+
     // fix cursor bug
     if (tag === "input" && "value" in props) {
         props.value = softSetHook(props.value)
@@ -50,7 +55,7 @@ function h(tagName, properties, children) {
         }
     }
 
-    return new VNode(tag, props, childNodes)
+    return new VNode(tag, props, childNodes, key)
 }
 
 function addChild(c, childNodes) {
