@@ -13,13 +13,11 @@ module.exports = h
 
 function h(tagName, properties, children) {
     var childNodes = []
-    var tag, props, key
+    var tag, props, key, namespace
 
-    if (!children) {
-        if (isChildren(properties)) {
-            children = properties
-            props = {}
-        }
+    if (!children && isChildren(properties)) {
+        children = properties
+        props = {}
     }
 
     props = props || properties || {}
@@ -38,6 +36,13 @@ function h(tagName, properties, children) {
     // support keys
     if ("key" in props) {
         key = props.key
+        props.key = undefined
+    }
+
+    // support namespace
+    if ("namespace" in props) {
+        namespace = props.namespace
+        props.namespace = undefined
     }
 
     // fix cursor bug
@@ -59,7 +64,7 @@ function h(tagName, properties, children) {
         }
     }
 
-    return new VNode(tag, props, childNodes, key)
+    return new VNode(tag, props, childNodes, key, namespace)
 }
 
 function addChild(c, childNodes) {
@@ -75,5 +80,5 @@ function isChild(x) {
 }
 
 function isChildren(x) {
-    return typeof x === "string" || Array.isArray(x) || isChild(x)
+    return typeof x === "string" || Array.isArray(x)
 }
