@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "data-set": "^3.0.0",
-    "virtual-dom": "0.0.6"
+    "virtual-dom": "0.0.7"
   },
   "devDependencies": {
     "tape": "~1.0.2"
