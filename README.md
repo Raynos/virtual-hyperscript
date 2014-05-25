@@ -15,10 +15,36 @@ A DSL for creating virtual trees
 ## Example
 
 ```js
-var virtualHyperscript = require("virtual-hyperscript")
+var h = require('virtual-hyperscript')
 
-// TODO. Show example
+var tree = h('div.foo#some-id', [
+    h('span', 'some text'),
+    h('input', { type: 'text', value: 'foo' })
+])
 ```
+
+## Docs
+
+See [hyperscript](https://github.com/dominictarr/hyperscript) which has the
+  same interface.
+  
+Except `virtual-hyperscript` returns a virtual DOM tree instead of a DOM
+  element.
+
+### `h(selector, properties, children)`
+
+`h()` takes a selector, an optional properties object and an
+  optional array of children or a child that is a string.
+  
+If you pass it a selector like `span.foo.bar#some-id` it will
+  parse the selector and change the `id` and `className`
+  properties of the `properties` object.
+  
+If you pass it an array of `children` it will have child
+  nodes, normally ou want to create children with `h()`.
+  
+If you pass it a string it will create an array containing
+  a single child node that is a text element.
 
 ## Installation
 
