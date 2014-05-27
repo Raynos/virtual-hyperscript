@@ -24,13 +24,7 @@ function h(tagName, properties, children) {
     tag = parseTag(tagName, props)
 
     if (children) {
-        if (Array.isArray(children)) {
-            for (var i = 0; i < children.length; i++) {
-                addChild(children[i], childNodes)
-            }
-        } else {
-            addChild(children, childNodes)
-        }
+        addChild(children, childNodes)
     }
 
     // support keys
@@ -72,6 +66,10 @@ function addChild(c, childNodes) {
         childNodes.push(new VText(c))
     } else if (isChild(c)) {
         childNodes.push(c)
+    } else if (Array.isArray(c)) {
+        for (var i = 0; i < c.length; i++) {
+            addChild(c[i], childNodes)
+        }
     }
 }
 
