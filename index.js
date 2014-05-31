@@ -78,5 +78,5 @@ function isChild(x) {
 }
 
 function isChildren(x) {
-    return typeof x === "string" || Array.isArray(x)
+    return typeof x === "string" || Array.isArray(x) || isChild(x)
 }
