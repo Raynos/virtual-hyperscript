@@ -8,6 +8,7 @@ var isHook = require("virtual-dom/vtree/is-vhook")
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")
 var dataSetHook = require("./hooks/data-set-hook.js")
+var evHook = require("./hooks/ev-hook.js")
 
 module.exports = h
 
@@ -48,15 +49,26 @@ function h(tagName, properties, children) {
         props.value = softSetHook(props.value)
     }
 
-    // add data-set support
     var keys = Object.keys(props)
+    var propName, value
     for (var j = 0; j < keys.length; j++) {
-        var propName = keys[j]
-        var value = props[propName]
-        if (!isHook(value) && propName.substr(0, 5) === "data-") {
+        propName = keys[j]
+        value = props[propName]
+        if (isHook(value)) {
+            continue
+        }
+
+        // add data-foo support
+        if (propName.substr(0, 5) === "data-") {
             props[propName] = dataSetHook(value)
         }
+
+        // add ev-foo support
+        if (propName.substr(0, 3) === "ev-") {
+            props[propName] = evHook(value)
+        }
     }
+
 
     return new VNode(tag, props, childNodes, key, namespace)
 }
