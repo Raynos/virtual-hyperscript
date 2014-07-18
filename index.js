@@ -5,11 +5,23 @@ var isVText = require("vtree/is-vtext")
 var isWidget = require("vtree/is-widget")
 var isHook = require("vtree/is-vhook")
 var isVThunk = require("vtree/is-thunk")
+var TypedError = require("error/typed")
 
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")
 var dataSetHook = require("./hooks/data-set-hook.js")
 var evHook = require("./hooks/ev-hook.js")
+
+var UnexpectedVirtualElement = TypedError({
+    type: "virtual-hyperscript.unexpected.virtual-element",
+    message: "Unexpected virtual child passed to h().\n" +
+        "Expected a VNode / Vthunk / VWidget / string but:\n" +
+        "got a {foreignObject}.\n" +
+        "The parent vnode is {parentVnode}.\n" +
+        "Suggested fix: change your `h(..., [ ... ])` callsite.",
+    foreignObject: null,
+    parentVnode: null
+})
 
 module.exports = h
 
@@ -24,10 +36,6 @@ function h(tagName, properties, children) {
 
     props = props || properties || {}
     tag = parseTag(tagName, props)
-
-    if (children) {
-        addChild(children, childNodes)
-    }
 
     // support keys
     if ("key" in props) {
@@ -70,19 +78,35 @@ function h(tagName, properties, children) {
         }
     }
 
+    if (children) {
+        addChild(children, childNodes, tag, props)
+    }
 
-    return new VNode(tag, props, childNodes, key, namespace)
+
+    var node = new VNode(tag, props, childNodes, key, namespace)
+
+    return node
 }
 
-function addChild(c, childNodes) {
+function addChild(c, childNodes, tag, props) {
     if (typeof c === "string") {
         childNodes.push(new VText(c))
     } else if (isChild(c)) {
         childNodes.push(c)
     } else if (Array.isArray(c)) {
         for (var i = 0; i < c.length; i++) {
-            addChild(c[i], childNodes)
+            addChild(c[i], childNodes, tag, props)
         }
+    } else if (c === null || c === undefined) {
+        return
+    } else {
+        throw UnexpectedVirtualElement({
+            foreignObject: JSON.stringify(c),
+            parentVnode: JSON.stringify({
+                tagName: tag,
+                properties: props
+            })
+        })
     }
 }
 

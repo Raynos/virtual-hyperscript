@@ -102,6 +102,27 @@ test("h with null", function (assert) {
     assert.end()
 })
 
+test("h with undefined", function (assert) {
+    var node = h("div", undefined)
+    var node2 = h("div", [undefined])
+
+    assert.equal(node.children.length, 0)
+    assert.equal(node2.children.length, 0)
+
+    assert.end()
+})
+
+test("h with foreign object", function (assert) {
+    assert.throws(function () {
+        h("div", null, { foreign: "object" })
+    }, /Unexpected virtual child/)
+    assert.throws(function () {
+        h("div", [{ foreign: "object" }])
+    }, /Unexpected virtual child/)
+
+    assert.end()
+})
+
 test("h with class", function (assert) {
     var node = h(".foo")
 
