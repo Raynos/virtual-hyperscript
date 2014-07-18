@@ -21,7 +21,7 @@
     "virtual-dom": "0.0.8"
   },
   "devDependencies": {
-    "tape": "~1.0.2"
+    "tape": "^2.13.3"
   },
   "licenses": [
     {
