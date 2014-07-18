@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "data-set": "^3.0.0",
-    "virtual-dom": "0.0.8",
     "vtree": "0.0.5"
   },
   "devDependencies": {
