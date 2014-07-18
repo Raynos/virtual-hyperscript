@@ -4,6 +4,7 @@ var isVNode = require("vtree/is-vnode")
 var isVText = require("vtree/is-vtext")
 var isWidget = require("vtree/is-widget")
 var isHook = require("vtree/is-vhook")
+var isVThunk = require("vtree/is-thunk")
 
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")
@@ -86,7 +87,7 @@ function addChild(c, childNodes) {
 }
 
 function isChild(x) {
-    return isVNode(x) || isVText(x) || isWidget(x)
+    return isVNode(x) || isVText(x) || isWidget(x) || isVThunk(x)
 }
 
 function isChildren(x) {
