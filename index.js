@@ -80,7 +80,7 @@ function h(tagName, properties, children) {
         }
     }
 
-    if (children) {
+    if (children !== undefined && children !== null) {
         addChild(children, childNodes, tag, props)
     }
 
