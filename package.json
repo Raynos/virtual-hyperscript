@@ -20,7 +20,7 @@
     "data-set": "^3.0.0",
     "error": "^4.1.1",
     "next-tick": "^0.2.2",
-    "vtree": "0.0.16"
+    "vtree": "0.0.21"
   },
   "devDependencies": {
     "tape": "^2.13.3"
