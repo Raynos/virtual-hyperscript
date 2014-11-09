@@ -16,3 +16,10 @@ DataSetHook.prototype.hook = function (node, propertyName) {
 
     ds[propName] = this.value;
 };
+
+DataSetHook.prototype.unhook = function(node, propertyName) {
+    var ds = DataSet(node);
+    var propName = propertyName.substr(3);
+
+    ds[propName] = undefined;
+}
