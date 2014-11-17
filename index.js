@@ -1,3 +1,5 @@
+var TypedError = require("error/typed")
+
 var VNode = require("vtree/vnode.js")
 var VText = require("vtree/vtext.js")
 var isVNode = require("vtree/is-vnode")
@@ -5,7 +7,6 @@ var isVText = require("vtree/is-vtext")
 var isWidget = require("vtree/is-widget")
 var isHook = require("vtree/is-vhook")
 var isVThunk = require("vtree/is-thunk")
-var TypedError = require("error/typed")
 
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")

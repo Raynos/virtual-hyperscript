@@ -20,15 +20,7 @@ test("svg with text", function (assert) {
 test("svg with properties", function (assert) {
     var node = svg("circle", { width: "40px" })
 
-    assert.ok(node.properties.width)
-
-    var elem = {
-        setAttributeNS: function (ns, propName, value) {
-            this[propName] = value
-        }
-    }
-    node.properties.width.hook(elem, "width")
-    assert.equal(elem.width, "40px")
+    assert.strictEqual(node.properties.attributes.width, "40px")
 
     assert.end()
 })

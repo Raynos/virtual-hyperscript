@@ -1,4 +1,3 @@
-var attributeHook = require("./hooks/attribute-hook.js")
 var h = require("./index.js")
 
 var BLACKLISTED_KEYS = {
@@ -21,6 +20,8 @@ function svg(tagName, properties, children) {
     // set namespace for svg
     properties.namespace = SVG_NAMESPACE
 
+    var attributes = properties.attributes || (properties.attributes = {})
+
     // for each key, if attribute & string, bool or number then
     // convert it into a setAttribute hook
     for (var key in properties) {
@@ -40,7 +41,7 @@ function svg(tagName, properties, children) {
             continue
         }
 
-        properties[key] = attributeHook(value)
+        attributes[key] = value
     }
 
     return h(tagName, properties, children)
