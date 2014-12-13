@@ -11,6 +11,7 @@ var isVThunk = require("vtree/is-thunk")
 var parseTag = require("./parse-tag.js")
 var softSetHook = require("./hooks/soft-set-hook.js")
 var dataSetHook = require("./hooks/data-set-hook.js")
+var attributeHook = require("./hooks/attribute-hook.js")
 var evHook = require("./hooks/ev-hook.js")
 
 var UnexpectedVirtualElement = TypedError({
@@ -78,6 +79,11 @@ function h(tagName, properties, children) {
         // add ev-foo support
         if (propName.substr(0, 3) === "ev-") {
             props[propName] = evHook(value)
+        }
+
+        // add attr-foo support
+        if (propName.substr(0, 5) === "attr-") {
+            props[propName.substr(5)] = attributeHook(value)
         }
     }
 

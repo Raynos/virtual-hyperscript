@@ -162,3 +162,27 @@ test("h with two ids", function (assert) {
 
     assert.end()
 })
+
+test("h with attr-", function (assert) {
+    var node = h("div", { "attr-foo": "bar" })
+
+    assert.equal(node.properties["attr-foo"], "bar")
+    assert.ok(node.properties["foo"])
+
+    var hook = node.properties["foo"]
+
+    var elem = {
+        setAttributeNS: function (ns, name, value) {
+            assert.equal(ns, null)
+            assert.equal(name, "foo")
+            assert.equal(value, "bar")
+
+            this.attributes = {}
+            this.attributes[name] = value
+        }
+    }
+    hook.hook(elem, "foo")
+    assert.equal(elem.attributes.foo, "bar")
+
+    assert.end()
+})
