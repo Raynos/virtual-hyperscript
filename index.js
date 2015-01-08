@@ -52,6 +52,12 @@ function h(tagName, properties, children) {
         props.namespace = undefined
     }
 
+    // properties.children
+    if ("children" in props) {
+      children = props.children
+      props.children = undefined
+    }
+
     // fix cursor bug
     if (tag === "input" &&
         "value" in props &&
