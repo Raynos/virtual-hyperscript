@@ -12,6 +12,8 @@
 
 A DSL for creating virtual trees
 
+# **MOVED.** Please check out [virtual-dom](https://github.com/Matt-Esch/virtual-dom/tree/master/virtual-hyperscript) for the source code.
+
 ## Example
 
 ```js
