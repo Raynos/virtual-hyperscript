@@ -162,3 +162,20 @@ test("h with two ids", function (assert) {
 
     assert.end()
 })
+
+test("h with properties.children", function(assert) {
+  var node = h("#foo", { children: "bar" })
+
+  assert.equal(node.children[0].text, "bar")
+
+  assert.end();
+});
+
+test("h with two children defs", function(assert) {
+  var node = h("#foo", { children: "bar" }, "foo")
+
+  assert.equal(node.children.length, 1)
+  assert.equal(node.children[0].text, "bar")
+
+  assert.end();
+});

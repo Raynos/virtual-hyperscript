@@ -85,6 +85,12 @@ This means that `dom-delegator` will recognise the event handler
   on that element and correctly call your handler when an a click
   event happens.
 
+#### `children`
+
+If you call `h` with `h('div', { children: "foo" })` it will use
+  `properties.children` as the nodes children instead of the third
+  argument.
+
 ## Installation
 
 `npm install virtual-hyperscript`
