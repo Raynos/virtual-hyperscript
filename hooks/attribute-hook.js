@@ -13,5 +13,5 @@ AttributeHook.prototype.hook = function (node, prop, prev) {
         return;
     }
 
-    node.setAttributeNS(null, prop, this.value)
+    node.setAttribute(prop, this.value)
 }
